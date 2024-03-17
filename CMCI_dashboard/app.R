@@ -7,6 +7,8 @@ library(readr)
 # Read the data from CSV file
 data <- read.csv("/Users/victoriapuck-karam/Documents/CMCI-Dashboard/CMCI_FINAL_DATA.csv")
 
+# Comment to test git
+
 # Convert the 'DATE' column to date format
 data$DATE <- as.Date(data$DATE)
 
