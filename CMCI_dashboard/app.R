@@ -22,30 +22,36 @@ ui <- fluidPage(
                      max = max(data$DATE))
     ),
     mainPanel(
-      plotOutput("linePlot")
+      plotOutput("linePlot"),
+      textOutput("dataInfo")
     )
   )
 )
 
 # Define server logic
-
-  # Define server logic
-  server <- function(input, output) {
-    
-    # Reactive expression for data subset based on date range
-    selectedData <- reactive({
-      data %>%
-        filter(DATE >= input$date_range[1] & DATE <= input$date_range[2])
-    })
-    
-    # Generate the line plot
-    output$linePlot <- renderPlot({
-      ggplot(selectedData(), aes(x = DATE, y = CMCI)) +
-        geom_line() +
-        labs(x = "Date", y = "CMCI", title = "CMCI Time Series") +
-        theme(axis.text.x = element_text(angle = 45, hjust = 1))
-    })
-  }
+server <- function(input, output) {
   
+  # Reactive expression for data subset based on date range
+  selectedData <- reactive({
+    data %>%
+      filter(DATE >= input$date_range[1] & DATE <= input$date_range[2])
+  })
+  
+  # Generate the line plot
+  output$linePlot <- renderPlot({
+    ggplot(selectedData(), aes(x = DATE, y = CMCI)) +
+      geom_line() +
+      labs(x = "Date", y = "CMCI", title = "CMCI Time Series") +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  })
+  
+  # Render text explaining the data
+  output$dataInfo <- renderText({
+    "This is a placeholder for where the educational information will go and the data transparency statements"
+  })
+}
+
 # Run the application
 shinyApp(ui = ui, server = server)
+
+
