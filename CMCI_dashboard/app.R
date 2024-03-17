@@ -83,7 +83,7 @@ server <- function(input, output) {
     
     # Generate plot
     p <- plot_ly(dataLong, x = ~DATE, y = ~Index, color = ~Country, type = 'scatter', mode = 'lines') %>%
-      layout(title = "Country Index Over Time",
+      layout(title = "CMCI Index Country Data Over Time",
              xaxis = list(title = "Date"),
              yaxis = list(title = "Index"))
     
@@ -99,7 +99,7 @@ server <- function(input, output) {
     
     # Generate plot
     p <- plot_ly(dataLong, x = ~DATE, y = ~Value, color = ~Index, type = 'scatter', mode = 'lines') %>%
-      layout(title = "Country Index Over Time",
+      layout(title = "Comparitive Consumer Index Graph",
              xaxis = list(title = "Date"),
              yaxis = list(title = "Value of Index"))
     
