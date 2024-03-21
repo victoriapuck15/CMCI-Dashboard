@@ -8,12 +8,18 @@ library(plotly)
 # Read the data from CSV file
 data2 <- read.csv("/Users/michaellicata/Documents/SeniorYear/SP '24/DS 440/CMCI-Dashboard/cmciGood2.csv")
 compare_df <- read.csv("/Users/michaellicata/Documents/SeniorYear/SP '24/DS 440/CMCI-Dashboard/compare_data.csv")
-colnames(data2)[1] <- "DATE"
+cci_cmci_df <- read.csv("/Users/michaellicata/Documents/SeniorYear/SP '24/DS 440/CMCI-Dashboard/CMCI_FINAL.csv")
 
+colnames(data2)[1] <- "DATE"
+cci_cmci_df <- as.data.frame(cci_cmci_df)
 
 # Convert the 'DATE' column to date format
+cci_cmci_df$DATE <- as.Date(cci_cmci_df$DATE)
 data2$DATE <- as.Date(data2$DATE)
 compare_df$DATE <- as.Date(compare_df$DATE)
+
+names(cci_cmci_df) <- gsub("\\.", " ", names(cci_cmci_df))
+
 
 # Define UI
 ui <- fluidPage(
@@ -21,7 +27,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       tabsetPanel(
-        tabPanel("CMCIPlot",
+        tabPanel("CMCI Plot",
                  
                  dateRangeInput("date_range", "Date Range:",
                      start = min(data2$DATE),
@@ -34,7 +40,7 @@ ui <- fluidPage(
                  checkboxGroupInput("countries", "Select Countries:", 
                          choices = colnames(data2)[-1], selected = colnames(data2)[-1])
       ),
-      tabPanel("ComparisonPlot",
+      tabPanel("United States Index Comparison Plot",
                
                dateRangeInput("date_range2", "Date Range:",
                               start = min(compare_df$DATE),
@@ -46,14 +52,32 @@ ui <- fluidPage(
                
                checkboxGroupInput("indexes", "Select Indexes:", 
                                   choices = colnames(compare_df)[-1], selected = colnames(compare_df)[-1])
+      ), 
+      
+      tabPanel("Full Country CCI and CMCI Comparison Graph",
+               
+               dateRangeInput("date_range3", "Date Range:",
+                              start = min(cci_cmci_df$DATE),
+                              end = max(cci_cmci_df$DATE),
+                              min = min(cci_cmci_df$DATE),
+                              max = max(cci_cmci_df$DATE)),
+               
+               hr(),
+               
+               varSelectInput("cmci", "CMCI Country", cci_cmci_df[2:15], selected = "USA CMCI"),
+               hr(),
+               varSelectInput("cci", "CCI Country", cci_cmci_df[16:30], selected = "USA CCI")
       )
+      
+      
       )
       ),
     mainPanel(
       
       tabsetPanel(
       tabPanel("CMCI Plot", plotlyOutput("CMCIPlot")),
-      tabPanel("Comparison Plot", plotlyOutput("ComparisonPlot")),
+      tabPanel("United States Index Comparison Plot", plotlyOutput("ComparisonPlot")),
+      tabPanel("Full Country CCI and CMCI Comparison Graph", plotlyOutput("CMCIvsCCI")),
       tabPanel("Info Section", textOutput("dataInfo"))
       )
   )
@@ -77,6 +101,13 @@ server <- function(input, output) {
       filter(DATE >= input$date_range2[1] & DATE <= input$date_range2[2]) %>%
       select(c("DATE", input$indexes))
   })
+  
+  selectedData3 <- reactive({
+    cci_cmci_df %>%
+      filter(DATE >= input$date_range3[1] & DATE <= input$date_range3[2]) %>%
+      select(c("DATE", c(input$cmci, input$cci)))
+  })
+
   
   output$CMCIPlot <- renderPlotly({
     # Filter data based on selected countries
@@ -108,7 +139,32 @@ server <- function(input, output) {
              yaxis = list(title = "Value of Index"))
     
     return(p)
+    
   })
+  
+  output$CMCIvsCCI <- renderPlotly({
+    
+    dataSelected <- selectedData3()
+    
+    
+    # Filter data based on selected countries
+    p <- ggplot(dataSelected, aes(x = DATE)) +
+      geom_line(aes(y = !!input$cmci, color = "CMCI Line")) +  
+      geom_line(aes(y = !!input$cci, color = "CCI Line")) +    
+      labs(
+        title = "Full Country CCI and CMCI Comparison Graph",
+        x = "Date",
+        y = "Index Value",
+        color = "Legend"
+      ) +
+      theme_minimal() +
+      scale_color_manual(values = c("CMCI Line" = "blue", "CCI Line" = "red"))  # Set custom colors
+    
+    return(p)
+    
+    
+  })
+  
   
 }
 
