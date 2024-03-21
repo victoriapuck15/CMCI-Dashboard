@@ -50,10 +50,14 @@ ui <- fluidPage(
       )
       ),
     mainPanel(
-      plotlyOutput("CMCIPlot"),
-      plotlyOutput("ComparisonPlot"),
-      textOutput("dataInfo")
+      
+      tabsetPanel(
+      tabPanel("CMCI Plot", plotlyOutput("CMCIPlot")),
+      tabPanel("Comparison Plot", plotlyOutput("ComparisonPlot")),
+      tabPanel("Info Section", textOutput("dataInfo"))
+      )
   )
+
 )
 )
 
