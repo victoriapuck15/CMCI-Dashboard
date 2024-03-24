@@ -21,13 +21,12 @@ names(cci_cmci_df) <- gsub("\\.", " ", names(cci_cmci_df))
 
 ui <- page_navbar(
   theme = bs_theme(version = 5, bootswatch = "morph"),
-  title = "My App",
-  inverse = TRUE,
-  nav_panel(title = "One", 
+  title = "CMCI Dashboard",
+  nav_panel(title = "Full Country CMCI Data", 
             
             page_fillable(
               card(
-                card_header("CMCI Time Series"),
+                card_header("CMCI Index Country Data Over Time"),
                 layout_sidebar(
                   sidebar = sidebar(
                     dateRangeInput("date_range", "Date Range:",
@@ -45,7 +44,7 @@ ui <- page_navbar(
                 ))
             )
             ),
-  nav_panel(title = "Two", 
+  nav_panel(title = "United States Index Data", 
             
             page_fillable(
               
@@ -70,7 +69,7 @@ ui <- page_navbar(
             )
             
             ),
-  nav_panel(title = "Three", 
+  nav_panel(title = "Country by Country CMCI and CCI Data", 
             
             page_fillable(
               
@@ -96,6 +95,13 @@ ui <- page_navbar(
             )
             
             ),
+  nav_panel(title = "CMCI Index Info", 
+            
+            page_fillable(
+              card(
+                card_header("CMCI Index Info")
+                ))
+  ),
   nav_spacer(),
   nav_menu(
     title = "Links",
