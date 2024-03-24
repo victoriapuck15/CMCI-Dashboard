@@ -138,10 +138,47 @@ server <- function(input, output) {
     dataLong <- reshape2::melt(dataSelected, id.vars = "DATE", variable.name = "Country", value.name = "Index")
     
     # Generate plot
-    p <- plot_ly(dataLong, x = ~DATE, y = ~Index, color = ~Country, type = 'scatter', mode = 'lines') %>%
-      layout(title = "CMCI Index Country Data Over Time",
-             xaxis = list(title = "Date"),
-             yaxis = list(title = "Index"))
+    p <- plot_ly(dataLong, x = ~DATE, y = ~Index, color = ~Country, type = 'scatter', mode = 'lines',
+                 line = list(width = 2), # Adjust line width for better visibility
+                 hoverinfo = 'text', # Customize hover text
+                 text = ~paste('Date: ', DATE, '<br>Index: ', Index, '<br>Country: ', Country)) %>%
+      
+      layout(
+        title = list(text = "CMCI Index Country Data Over Time", font = list(size = 24, color = "black")), # Customize title font size and color
+        xaxis = list(
+          title = list(text = "Date", font = list(size = 18, color = "black")),
+          tickfont = list(size = 12), # Customize axis tick font sizes
+          zeroline = F, # Remove zero line for a cleaner look
+          gridcolor = "lightgrey" # Lighten grid lines for less visual clutter
+        ),
+        yaxis = list(
+          title = list(text = "Value of Index", font = list(size = 18, color = "black")),
+          tickfont = list(size = 12),
+          zeroline = F,
+          gridcolor = "lightgrey"
+        ),
+        legend = list(
+          orientation = "h", # Horizontal legend for better layout
+          y = -0.2, # Adjust legend position
+          xanchor = "center",
+          x = 0.5,
+          font = list(size = 12) # Customize legend font size
+        ),
+        margin = list( # Adjust margins to make better use of space
+          l = 50,
+          r = 50,
+          t = 100,
+          b = 50
+        ),
+        plot_bgcolor = 'rgba(0, 0, 0, 0)', # Set background color to white for a clean look
+        paper_bgcolor = 'rgba(0, 0, 0, 0)'
+      ) %>%
+      config( # Add config options for interactivity
+        scrollZoom = TRUE,
+        displayModeBar = TRUE,
+        displaylogo = FALSE,
+        modeBarButtonsToRemove = list('select2d', 'lasso2d')
+      )
     
     return(p)
   })
@@ -159,15 +196,15 @@ server <- function(input, output) {
                  hoverinfo = 'text', # Customize hover text
                  text = ~paste('Date: ', DATE, '<br>Value: ', Value, '<br>Index: ', Index)) %>%
       layout(
-        title = list(text = "Comparative Consumer Index Graph", font = list(size = 24, color = 'blue')), # Customize title font size and color
+        title = list(text = "Comparative Consumer Index Graph", font = list(size = 24, color = 'black')), # Customize title font size and color
         xaxis = list(
-          title = list(text = "AHHHH", font = list(size = 18, color = "blue")),
+          title = list(text = "Date", font = list(size = 18, color = "black")),
           tickfont = list(size = 12), # Customize axis tick font sizes
           zeroline = F, # Remove zero line for a cleaner look
           gridcolor = 'lightgrey' # Lighten grid lines for less visual clutter
         ),
         yaxis = list(
-          title = list(text = "Value of Index", font = list(size = 18, color = "blue")),
+          title = list(text = "Value of Index", font = list(size = 18, color = "black")),
           tickfont = list(size = 12),
           zeroline = F,
           gridcolor = 'lightgrey'
@@ -185,8 +222,8 @@ server <- function(input, output) {
           t = 100,
           b = 50
         ),
-        plot_bgcolor = 'white', # Set background color to white for a clean look
-        paper_bgcolor = 'white'
+        plot_bgcolor = 'rgba(0, 0, 0, 0)', # Set background color to white for a clean look
+        paper_bgcolor = 'rgba(0, 0, 0, 0)'
       ) %>%
       config( # Add config options for interactivity
         scrollZoom = TRUE,
