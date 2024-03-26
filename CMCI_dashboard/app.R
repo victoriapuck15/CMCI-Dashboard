@@ -2,6 +2,7 @@
 library(shiny)
 library(plotly)
 library(bslib)
+library(lubridate)
 
 # Read the data from CSV file
 data2 <- read.csv("/Users/michaellicata/Documents/SeniorYear/SP '24/DS 440/CMCI-Dashboard/cmciGood2.csv")
@@ -254,32 +255,39 @@ server <- function(input, output) {
   output$CMCIvsCCI <- renderPlotly({
     
     dataSelected <- selectedData3()
+    dataSelected$DATE <- as.Date(dataSelected$DATE)
+    
+    # Calculate correlation and p-value
+    cor_test <- cor.test(dataSelected[[input$cci]], dataSelected[[input$cmci]])
+    cor_text <- sprintf("Correlation: %.4f\np-value: %.4f", cor_test$estimate, cor_test$p.value)
+    
+    # Create the plot with styling similar to the provided example
+    p <- plot_ly(data = dataSelected, x = ~DATE) %>%
+      add_lines(y = ~dataSelected[[input$cmci]], name = "CMCI Line", line = list(color = 'darkgreen', width = 2),
+                hoverinfo = 'text', text = ~paste('Date: ', DATE, '<br>Value: ', dataSelected[[input$cmci]], '<br>Index: CMCI Line')) %>%
+      add_lines(y = ~dataSelected[[input$cci]], name = "CCI Line", line = list(color = 'navy', width = 2),
+                hoverinfo = 'text', text = ~paste('Date: ', DATE, '<br>Value: ', dataSelected[[input$cci]], '<br>Index: CCI Line')) %>%
+      layout(
+        title = list(text = "Full Country CCI and CMCI Comparison Graph", font = list(size = 24, color = 'black')),
+        xaxis = list(title = list(text = "Date", font = list(size = 18, color = "black")),
+                     tickfont = list(size = 12),
+                     zeroline = F,
+                     gridcolor = 'lightgrey'),
+        yaxis = list(title = list(text = "Index Value", font = list(size = 18, color = "black")),
+                     tickfont = list(size = 12),
+                     zeroline = F,
+                     gridcolor = 'lightgrey'),
+        legend = list(orientation = "h", y = -0.2, xanchor = "center", x = 0.5, font = list(size = 12)),
+        margin = list(l = 50, r = 50, t = 100, b = 50),
+        plot_bgcolor = 'rgba(0, 0, 0, 0)',
+        paper_bgcolor = 'rgba(0, 0, 0, 0)',
+        annotations = list(x = min(dataSelected$DATE) %m+% years(1), y = min(c(min(dataSelected[[input$cci]], na.rm = TRUE), min(dataSelected[[input$cmci]], na.rm = TRUE))), 
+                           text = cor_text, showarrow = F, xanchor = 'left', yanchor = 'bottom', font = list(size = 12))
+      ) %>%
+      config(scrollZoom = TRUE, displayModeBar = TRUE, displaylogo = FALSE, modeBarButtonsToRemove = list('select2d', 'lasso2d'))
     
     
-    # Filter data based on selected countries
-    p <- ggplot(dataSelected, aes(x = DATE)) +
-      geom_line(aes(y = !!input$cmci, color = "CMCI Line")) +  
-      geom_line(aes(y = !!input$cci, color = "CCI Line")) +    
-      labs(
-        title = "Full Country CCI and CMCI Comparison Graph",
-        x = "Date",
-        y = "Index Value",
-        color = "Legend"
-      ) +
-      theme_minimal(base_size = 15) +  # Use theme_minimal as the base
-      theme(plot.background = element_rect(fill = "transparent", color = NA),  # Transparent plot background
-            panel.background = element_rect(fill = "transparent", color = NA), # Transparent panel background
-            legend.background = element_rect(fill = "transparent", color = NA), # Transparent legend background
-            legend.box.background = element_rect(fill = "transparent", color = NA), # Transparent legend box background
-            panel.grid.major = element_line(color = "grey", size = 0.5), # Customize major grid lines
-            panel.grid.minor = element_line(color = "lightgrey", size = 0.25) # Customize minor grid lines
-      ) +
-      scale_color_manual(values = c("CMCI Line" = "darkgreen", "CCI Line" = "navy")) # Set custom colors
-    
-    # Convert ggplot object to a plotly object for interactive visuals
-    ggplotly_obj <- ggplotly(p)
-    
-    return(ggplotly_obj)
+    return(p)
     
     
   })
