@@ -2,6 +2,7 @@
 library(shiny)
 library(plotly)
 library(bslib)
+library(dplyr)
 library(lubridate)
 
 # Read the data from CSV file
@@ -100,6 +101,66 @@ ui <- page_navbar(
             )
             
             ),
+  nav_panel(title = "United States Lag Data", 
+            
+            page_fillable(
+              
+              card(
+                card_header("United States CMCI Lag Plot"),
+                layout_sidebar(
+                  sidebar = sidebar(
+                    dateRangeInput("date_range4", "Date Range:",
+                                   start = min(compare_df$DATE),
+                                   end = max(compare_df$DATE),
+                                   min = min(compare_df$DATE),
+                                   max = max(compare_df$DATE)),
+                    
+                    hr(),
+                    
+                    varSelectInput("indicator", "Indicator", compare_df[3:5], 
+                                   selected = "CSI"),
+                    hr(),
+                    sliderInput("cmciLag", "Lag CMCI by:",
+                                min = 0, max = 4, value = 0, step = 1)
+                    
+                  ),
+                  plotlyOutput("LagPlot")
+                ))
+              
+            )
+            
+  ),
+  
+  nav_panel(title = "United States Lead Data", 
+            
+            page_fillable(
+              
+              card(
+                card_header("United States CMCI Lead Plot"),
+                layout_sidebar(
+                  sidebar = sidebar(
+                    dateRangeInput("date_range5", "Date Range:",
+                                   start = min(compare_df$DATE),
+                                   end = max(compare_df$DATE),
+                                   min = min(compare_df$DATE),
+                                   max = max(compare_df$DATE)),
+                    
+                    hr(),
+                    
+                    varSelectInput("indicator", "Indicator", compare_df[3:5], 
+                                   selected = "CSI"),
+                    hr(),
+                    sliderInput("cmciLead", "Lead CMCI by:",
+                                min = 0, max = 4, value = 0, step = 1)
+                    
+                  ),
+                  plotlyOutput("LeadPlot")
+                ))
+              
+            )
+            
+  ),
+  
   nav_panel(title = "CMCI Index Info", 
             
             page_fillable(
@@ -138,6 +199,18 @@ server <- function(input, output) {
     cci_cmci_df %>%
       filter(DATE >= input$date_range3[1] & DATE <= input$date_range3[2]) %>%
       select(c("DATE", c(input$cmci, input$cci)))
+  })
+  
+  selectedData4 <- reactive({
+     compare_df %>%
+      filter(DATE >= input$date_range4[1] & DATE <= input$date_range4[2]) %>%
+      select(c("DATE", c("CMCI", input$indicator)))
+  })
+  
+  selectedData5 <- reactive({
+    compare_df %>%
+      filter(DATE >= input$date_range5[1] & DATE <= input$date_range5[2]) %>%
+      select(c("DATE", c("CMCI", input$indicator)))
   })
 
   
@@ -292,6 +365,98 @@ server <- function(input, output) {
     
   })
   
+  
+  output$LagPlot <- renderPlotly({
+    
+    dataSelected <- selectedData4()
+    dataSelected$DATE <- as.Date(dataSelected$DATE)
+    
+    # Adjust the CMCI column based on the selected lag amount
+    dataSelected <- dataSelected %>%
+      arrange(DATE) %>%
+      mutate(CMCI_lagged = lag(CMCI, as.numeric(input$cmciLag)))
+    
+    # Recalculate correlation and p-value with lagged CMCI
+    cor_test <- cor.test(dataSelected[["CMCI_lagged"]], dataSelected[[input$indicator]], use = "complete.obs")
+    cor_text <- sprintf("Correlation: %.4f\np-value: %.4f", cor_test$estimate, cor_test$p.value)
+    
+    # Plotly graph creation code remains the same, just change `y = ~dataSelected[["CMCI"]]` 
+    # to `y = ~dataSelected[["CMCI_lagged"]]` for the CMCI line
+    
+    p <- plot_ly(data = dataSelected, x = ~DATE) %>%
+      add_lines(y = ~dataSelected[["CMCI_lagged"]], name = "CMCI Line", line = list(color = 'darkgreen', width = 2),
+                hoverinfo = 'text', text = ~paste('Date: ', DATE, '<br>Value: ', CMCI_lagged, '<br>Index: CMCI Line')) %>%
+      add_lines(y = ~dataSelected[[input$indicator]], name = "Indicator Line", line = list(color = 'navy', width = 2),
+                hoverinfo = 'text', text = ~paste('Date: ', DATE, '<br>Value: ', dataSelected[[input$indicator]], '<br>Index: Indicator Line')) %>%
+      layout(
+        title = list(text = "United States Indicator Comparison Graph", font = list(size = 24, color = 'black')),
+        xaxis = list(title = list(text = "Date", font = list(size = 18, color = "black")),
+                     tickfont = list(size = 12),
+                     zeroline = F,
+                     gridcolor = 'lightgrey'),
+        yaxis = list(title = list(text = "Index Value", font = list(size = 18, color = "black")),
+                     tickfont = list(size = 12),
+                     zeroline = F,
+                     gridcolor = 'lightgrey'),
+        legend = list(orientation = "h", y = -0.2, xanchor = "center", x = 0.5, font = list(size = 12)),
+        margin = list(l = 50, r = 50, t = 100, b = 50),
+        plot_bgcolor = 'rgba(0, 0, 0, 0)',
+        paper_bgcolor = 'rgba(0, 0, 0, 0)',
+        annotations = list(x = min(dataSelected$DATE) %m+% years(1), y = -4, 
+                           text = cor_text, showarrow = F, xanchor = 'left', yanchor = 'bottom', font = list(size = 12))
+      ) %>%
+      config(scrollZoom = TRUE, displayModeBar = TRUE, displaylogo = FALSE, modeBarButtonsToRemove = list('select2d', 'lasso2d'))
+    
+    
+    return(p)
+    
+  })
+  
+  output$LeadPlot <- renderPlotly({
+    
+    dataSelected <- selectedData5()
+    dataSelected$DATE <- as.Date(dataSelected$DATE)
+    
+    # Adjust the CMCI column based on the selected lag amount
+    dataSelected <- dataSelected %>%
+      arrange(DATE) %>%
+      mutate(CMCI_led = lead(CMCI, as.numeric(input$cmciLead)))
+    
+    # Recalculate correlation and p-value with lagged CMCI
+    cor_test <- cor.test(dataSelected[["CMCI_led"]], dataSelected[[input$indicator]], use = "complete.obs")
+    cor_text <- sprintf("Correlation: %.4f\np-value: %.4f", cor_test$estimate, cor_test$p.value)
+    
+    # Plotly graph creation code remains the same, just change `y = ~dataSelected[["CMCI"]]` 
+    # to `y = ~dataSelected[["CMCI_lagged"]]` for the CMCI line
+    
+    p <- plot_ly(data = dataSelected, x = ~DATE) %>%
+      add_lines(y = ~dataSelected[["CMCI_led"]], name = "CMCI Line", line = list(color = 'darkgreen', width = 2),
+                hoverinfo = 'text', text = ~paste('Date: ', DATE, '<br>Value: ', CMCI_led, '<br>Index: CMCI Line')) %>%
+      add_lines(y = ~dataSelected[[input$indicator]], name = "Indicator Line", line = list(color = 'navy', width = 2),
+                hoverinfo = 'text', text = ~paste('Date: ', DATE, '<br>Value: ', dataSelected[[input$indicator]], '<br>Index: Indicator Line')) %>%
+      layout(
+        title = list(text = "United States Indicator Comparison Graph", font = list(size = 24, color = 'black')),
+        xaxis = list(title = list(text = "Date", font = list(size = 18, color = "black")),
+                     tickfont = list(size = 12),
+                     zeroline = F,
+                     gridcolor = 'lightgrey'),
+        yaxis = list(title = list(text = "Index Value", font = list(size = 18, color = "black")),
+                     tickfont = list(size = 12),
+                     zeroline = F,
+                     gridcolor = 'lightgrey'),
+        legend = list(orientation = "h", y = -0.2, xanchor = "center", x = 0.5, font = list(size = 12)),
+        margin = list(l = 50, r = 50, t = 100, b = 50),
+        plot_bgcolor = 'rgba(0, 0, 0, 0)',
+        paper_bgcolor = 'rgba(0, 0, 0, 0)',
+        annotations = list(x = min(dataSelected$DATE) %m+% years(1), y = -4, 
+                           text = cor_text, showarrow = F, xanchor = 'left', yanchor = 'bottom', font = list(size = 12))
+      ) %>%
+      config(scrollZoom = TRUE, displayModeBar = TRUE, displaylogo = FALSE, modeBarButtonsToRemove = list('select2d', 'lasso2d'))
+    
+    
+    return(p)
+    
+  })
   
 }
 
