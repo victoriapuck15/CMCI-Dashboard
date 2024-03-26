@@ -38,7 +38,8 @@ ui <- page_navbar(
                     hr(),
                     
                     checkboxGroupInput("countries", "Select Countries:", 
-                                       choices = colnames(data2)[-1], selected = colnames(data2)[-1])
+                                       choices = colnames(data2)[-1], 
+                                       selected = colnames(data2)[-1])
                   ),
                   plotlyOutput("CMCIPlot")
                 ))
@@ -61,7 +62,8 @@ ui <- page_navbar(
                     hr(),
                     
                     checkboxGroupInput("indexes", "Select Indexes:", 
-                                       choices = colnames(compare_df)[-1], selected = colnames(compare_df)[-1])
+                                       choices = colnames(compare_df)[-1], 
+                                       selected = colnames(compare_df)[-1])
                   ),
                   plotlyOutput("ComparisonPlot")
                 ))
@@ -85,9 +87,11 @@ ui <- page_navbar(
                     
                     hr(),
                     
-                    varSelectInput("cmci", "CMCI Country", cci_cmci_df[2:15], selected = "USA CMCI"),
+                    varSelectInput("cmci", "CMCI Country", cci_cmci_df[2:15], 
+                                   selected = "USA CMCI"),
                     hr(),
-                    varSelectInput("cci", "CCI Country", cci_cmci_df[16:30], selected = "USA CCI")
+                    varSelectInput("cci", "CCI Country", cci_cmci_df[16:30], 
+                                   selected = "USA CCI")
                   ),
                   plotlyOutput("CMCIvsCCI")
                 ))
@@ -141,16 +145,19 @@ server <- function(input, output) {
     dataSelected <- selectedData()
     
     # Convert to long format for plotting with plotly
-    dataLong <- reshape2::melt(dataSelected, id.vars = "DATE", variable.name = "Country", value.name = "Index")
+    dataLong <- reshape2::melt(dataSelected, id.vars = "DATE", 
+                               variable.name = "Country", value.name = "Index")
     
     # Generate plot
-    p <- plot_ly(dataLong, x = ~DATE, y = ~Index, color = ~Country, type = 'scatter', mode = 'lines',
+    p <- plot_ly(dataLong, x = ~DATE, y = ~Index, color = ~Country, type = 'scatter', 
+                 mode = 'lines',
                  line = list(width = 2), # Adjust line width for better visibility
                  hoverinfo = 'text', # Customize hover text
                  text = ~paste('Date: ', DATE, '<br>Index: ', Index, '<br>Country: ', Country)) %>%
       
       layout(
-        title = list(text = "CMCI Index Country Data Over Time", font = list(size = 24, color = "black")), # Customize title font size and color
+        title = list(text = "CMCI Index Country Data Over Time", 
+                     font = list(size = 24, color = "black")), # Customize title font size and color
         xaxis = list(
           title = list(text = "Date", font = list(size = 18, color = "black")),
           tickfont = list(size = 12), # Customize axis tick font sizes
@@ -194,7 +201,8 @@ server <- function(input, output) {
     dataSelected <- selectedData2()
     
     # Convert to long format for plotting with plotly
-    dataLong <- reshape2::melt(dataSelected, id.vars = "DATE", variable.name = "Index", value.name = "Value")
+    dataLong <- reshape2::melt(dataSelected, id.vars = "DATE", 
+                               variable.name = "Index", value.name = "Value")
     
     # Generate plot
     p <- plot_ly(data = dataLong, x = ~DATE, y = ~Value, color = ~Index, type = 'scatter', mode = 'lines',
@@ -202,7 +210,8 @@ server <- function(input, output) {
                  hoverinfo = 'text', # Customize hover text
                  text = ~paste('Date: ', DATE, '<br>Value: ', Value, '<br>Index: ', Index)) %>%
       layout(
-        title = list(text = "Comparative Consumer Index Graph", font = list(size = 24, color = 'black')), # Customize title font size and color
+        title = list(text = "Comparative Consumer Index Graph", 
+                     font = list(size = 24, color = 'black')), # Customize title font size and color
         xaxis = list(
           title = list(text = "Date", font = list(size = 18, color = "black")),
           tickfont = list(size = 12), # Customize axis tick font sizes
@@ -257,10 +266,20 @@ server <- function(input, output) {
         y = "Index Value",
         color = "Legend"
       ) +
-      theme_minimal() +
-      scale_color_manual(values = c("CMCI Line" = "blue", "CCI Line" = "red"))  # Set custom colors
+      theme_minimal(base_size = 15) +  # Use theme_minimal as the base
+      theme(plot.background = element_rect(fill = "transparent", color = NA),  # Transparent plot background
+            panel.background = element_rect(fill = "transparent", color = NA), # Transparent panel background
+            legend.background = element_rect(fill = "transparent", color = NA), # Transparent legend background
+            legend.box.background = element_rect(fill = "transparent", color = NA), # Transparent legend box background
+            panel.grid.major = element_line(color = "grey", size = 0.5), # Customize major grid lines
+            panel.grid.minor = element_line(color = "lightgrey", size = 0.25) # Customize minor grid lines
+      ) +
+      scale_color_manual(values = c("CMCI Line" = "darkgreen", "CCI Line" = "navy")) # Set custom colors
     
-    return(ggplotly(p))
+    # Convert ggplot object to a plotly object for interactive visuals
+    ggplotly_obj <- ggplotly(p)
+    
+    return(ggplotly_obj)
     
     
   })
