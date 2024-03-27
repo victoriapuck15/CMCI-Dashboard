@@ -170,10 +170,10 @@ ui <- page_navbar(
   ),
   nav_spacer(),
   nav_menu(
-    title = "Links",
+    title = "Sources",
     align = "right",
-    nav_item(tags$a("Posit", href = "https://posit.co")),
-    nav_item(tags$a("Shiny", href = "https://shiny.posit.co"))
+    nav_item(tags$a("Parent Paper", href = "https://link.springer.com/article/10.1007/s11205-021-02626-6")),
+    nav_item(tags$a("Our Paper", href = "https://www.overleaf.com/read/btjkspsqpdjq#5f5c4e"))
   )
 )
 
