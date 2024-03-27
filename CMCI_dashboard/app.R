@@ -6,9 +6,9 @@ library(dplyr)
 library(lubridate)
 
 # Read the data from CSV file
-data2 <- read.csv("/Users/michaellicata/Documents/SeniorYear/SP '24/DS 440/CMCI-Dashboard/cmciGood2.csv")
-compare_df <- read.csv("/Users/michaellicata/Documents/SeniorYear/SP '24/DS 440/CMCI-Dashboard/compare_data.csv")
-cci_cmci_df <- read.csv("/Users/michaellicata/Documents/SeniorYear/SP '24/DS 440/CMCI-Dashboard/CMCI_FINAL.csv")
+data2 <- read.csv("cmciGood2.csv")
+compare_df <- read.csv("compare_data.csv")
+cci_cmci_df <- read.csv("CMCI_FINAL.csv")
 
 colnames(data2)[1] <- "DATE"
 cci_cmci_df <- as.data.frame(cci_cmci_df)
