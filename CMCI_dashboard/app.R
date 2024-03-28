@@ -233,9 +233,10 @@ ui <- page_navbar(
           <thead>
             <tr>
               <th scope="col" class="font-weight-bold text-dark">Component #</th>
-              <th scope="col" class="font-weight-bold text-dark">Variance %</th>
+              <th scope="col" class="font-weight-bold text-dark">% of Variance Explained</th>
             </tr>
           </thead>
+          
           <tbody class="table-light">
             <tr>
               <th scope="row" class="fw-normal">PC 1: Quarterly Gross Domestic Product</th>
@@ -243,16 +244,53 @@ ui <- page_navbar(
             </tr>
             <tr>
               <th scope="row" class="fw-normal">PC 2: Household Disposable Income</th>
-              <td>25.21%</td>
+              <td>12.59</td>
             </tr>
             <tr>
-            
-            
-            
-            
               <th scope="row" class="fw-normal">PC 3: Gross Household Savings</th>
-              <td>25.21%</td>
+              <td>12.02%</td>
             </tr>
+            
+            <tr>
+              <th scope="row" class="fw-normal">PC 4: Employee Compensation</th>
+              <td>10.98%</td>
+            </tr>            
+
+            <tr>
+              <th scope="row" class="fw-normal">PC 5: Employment Rate</th>
+              <td>9.10%</td>
+            </tr>
+            
+            <tr>
+              <th scope="row" class="fw-normal">PC 6: Share Price Index</th>
+              <td>8.09%</td>
+            </tr>
+            
+            <tr>
+              <th scope="row" class="fw-normal">PC 7: Effective Exchange Rate</th>
+              <td>7.48%</td>
+            </tr>
+
+            <tr>
+              <th scope="row" class="fw-normal">PC 8: Terms of Trade</th>
+              <td>5.56%</td>
+            </tr>
+
+            <tr>
+              <th scope="row" class="fw-normal">PC 9: House Price Index</th>
+              <td>4.87%</td>
+            </tr>
+
+            <tr>
+              <th scope="row" class="fw-normal">PC 10: Interest Rates on Mortgages</th>
+              <td>2.33%</td>
+            </tr>
+            
+            <tr>
+              <th scope="row" class="fw-normal">PC 11: Interest Rates on Consumer Loans</th>
+              <td>1.59%</td>
+            </tr>            
+            
           </tbody>
         </table>
       </div>
