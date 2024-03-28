@@ -183,7 +183,7 @@ ui <- page_navbar(
               card(
                 HTML('<p class="fs-2">Composite Macroeconomic Consumer Index (CMCI)</p>'),
                 #<p class="lh-base">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
-                HTML('<div class="p-3 mb-n6 bg-light-subtle text-dark"><p class="lh-base">In the aftermath of the COVID-19 pandemic, the global economy has experienced unprecedented shifts. The pandemic gave rise to supply chain disruptions, hindered economic growth, and introduced economic challenges on a global scale. These multifaceted issues have contributed to heightened volatility in the stock market and unpredictable fluctuations in business dynamics. Despite the effectiveness of traditional economic tools such as GDP Now models and indicators like the Consumer Confidence Index (CCI) in the past, their predictive capabilities have been challenged by the unique confluence of challenges brought about by the pandemic. <br><br> The CMCI index offers an alternative to traditional measures of consumer sentiment, without the use of expensive survey data.<br><br> Addressing the limitations of the CCI and single-value indicators, the CMCI is a composite index that serves as a proxy for consumer sentiment. The CMCI incorporates eleven distinct macroeconomic indicators collectively influencing consumer confidence and expectations as shown below:</p> </div>'),
+                HTML('<div class="p-3 mb-n6 bg-light-subtle text-dark "><p class="lh-base">In the aftermath of the COVID-19 pandemic, the global economy has experienced unprecedented shifts. The pandemic gave rise to supply chain disruptions, hindered economic growth, and introduced economic challenges on a global scale. These multifaceted issues have contributed to heightened volatility in the stock market and unpredictable fluctuations in business dynamics. Despite the effectiveness of traditional economic tools such as GDP Now models and indicators like the Consumer Confidence Index (CCI) in the past, their predictive capabilities have been challenged by the unique confluence of challenges brought about by the pandemic. <br><br> The CMCI index offers an alternative to traditional measures of consumer sentiment, without the use of expensive survey data.<br><br> Addressing the limitations of the CCI and single-value indicators, the CMCI is a composite index that serves as a proxy for consumer sentiment. The CMCI incorporates eleven distinct macroeconomic indicators collectively influencing consumer confidence and expectations as shown below:</p> </div>'),
                 HTML('<p class="fs-4 ">CMCI Variables</p>'),
                 HTML('<div class="accordion accordion-flush" id="accordionFlushExample">
   <div class="accordion-item">
@@ -218,7 +218,48 @@ ui <- page_navbar(
                <div class="accordion-body">Information on GHS </div>
 </div>
   </div>
-</div>')
+</div>'),HTML('<p class="fs-4 ">Evaluating CMCI Accuracy</p>'),
+               HTML('<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="p-1 mb-n6 bg-light-subtle text-dark">
+        <p class="lh-base">In order to most accurately evaluate the accuracy of the CMCI, a Princple Component Analysis (PCA) must first be conducted. <br>  <br> PCA is a multivariate statistical technique that aims to uncover the latent structures within a dataset, revealing the key variables that contribute significantly to the cumulative variance observed in the macroeconomic factors comprising the CMCI. <br> <br> Notably, the analysis revealed that a substantial portion, about 25.21% of the variance is explained by the Gross Domestic Product (GDP) macroeconomic indicator. This finding underscores the significance of GDP in predicting future values using the CMCI index.The second largest contributor to the variance of the data set is household disposable income, contributing  12.49% of the variance. 
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col" class="font-weight-bold text-dark">Component #</th>
+              <th scope="col" class="font-weight-bold text-dark">Variance %</th>
+            </tr>
+          </thead>
+          <tbody class="table-light">
+            <tr>
+              <th scope="row" class="fw-normal">PC 1: Quarterly Gross Domestic Product</th>
+              <td>25.21%</td>
+            </tr>
+            <tr>
+              <th scope="row" class="fw-normal">PC 2: Household Disposable Income</th>
+              <td>25.21%</td>
+            </tr>
+            <tr>
+            
+            
+            
+            
+              <th scope="row" class="fw-normal">PC 3: Gross Household Savings</th>
+              <td>25.21%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+'),
 
                 ))
   ),
