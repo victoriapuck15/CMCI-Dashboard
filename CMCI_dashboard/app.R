@@ -315,7 +315,7 @@ ui <- page_navbar(
     </div>
   </div>
 </div>
-'), HTML('<p class="fs-4">Nations Included in the CMCI Dataset</p>')
+')
 
                 ))
   ),
