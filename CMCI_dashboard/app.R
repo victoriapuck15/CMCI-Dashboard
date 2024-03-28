@@ -183,7 +183,7 @@ ui <- page_navbar(
               card(
                 HTML('<p class="fs-2">Composite Macroeconomic Consumer Index (CMCI)</p>'),
                 #<p class="lh-base">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
-                HTML('<div class="p-3 mb-n6 bg-light-subtle text-dark "><p class="lh-base">In the aftermath of the COVID-19 pandemic, the global economy has experienced unprecedented shifts. The pandemic gave rise to supply chain disruptions, hindered economic growth, and introduced economic challenges on a global scale. These multifaceted issues have contributed to heightened volatility in the stock market and unpredictable fluctuations in business dynamics. Despite the effectiveness of traditional economic tools such as GDP Now models and indicators like the Consumer Confidence Index (CCI) in the past, their predictive capabilities have been challenged by the unique confluence of challenges brought about by the pandemic. <br><br> The CMCI index offers an alternative to traditional measures of consumer sentiment, without the use of expensive survey data.<br><br> Addressing the limitations of the CCI and single-value indicators, the CMCI is a composite index that serves as a proxy for consumer sentiment. The CMCI incorporates eleven distinct macroeconomic indicators collectively influencing consumer confidence and expectations as shown below:</p> </div>'),
+                HTML('<div class="p-3 mb-n6 bg-light-subtle text-dark "><p class="lh-base">In the aftermath of the COVID-19 pandemic, the global economy has experienced unprecedented shifts. The pandemic gave rise to supply chain disruptions, hindered economic growth, and introduced economic challenges on a global scale. These multifaceted issues have contributed to heightened volatility in the stock market and unpredictable fluctuations in business dynamics. Despite the effectiveness of traditional economic tools such as GDP Now models and indicators like the Consumer Confidence Index (CCI) in the past, their predictive capabilities have been challenged by the unique confluence of challenges brought about by the pandemic. <br><br> The CMCI index offers an alternative to traditional measures of consumer sentiment, without the use of expensive survey data.<br><br> Addressing the limitations of the CCI and single-value indicators, the CMCI is a composite index that serves as a proxy for consumer sentiment. The CMCI incorporates eleven distinct macroeconomic indicators collectively influencing consumer confidence and expectations as shown below. The eleven macroeconomic factors were collected from 14 different, high earning nations.</p> </div>'),
                 HTML('<p class="fs-4 ">CMCI Variables</p>'),
                 HTML('<div class="accordion accordion-flush" id="accordionFlushExample">
   <div class="accordion-item">
@@ -218,7 +218,21 @@ ui <- page_navbar(
                <div class="accordion-body">Information on GHS </div>
 </div>
   </div>
-</div>'),HTML('<p class="fs-4 ">Evaluating CMCI Accuracy</p>'),
+</div>
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     '
+                     
+                     
+                     
+                     
+                     
+                     ),HTML('<p class="fs-4 ">Evaluating CMCI Accuracy</p>'),
                HTML('<div class="container">
   <div class="row">
     <div class="col-md-6">
