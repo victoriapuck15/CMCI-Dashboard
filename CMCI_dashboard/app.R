@@ -4,6 +4,10 @@ library(plotly)
 library(bslib)
 library(dplyr)
 library(lubridate)
+library(leaflet)
+
+
+
 
 # Read the data from CSV file
 data2 <- read.csv("cmciGood2.csv")
@@ -311,7 +315,7 @@ ui <- page_navbar(
     </div>
   </div>
 </div>
-'),
+'), HTML('<p class="fs-4">Nations Included in the CMCI Dataset</p>')
 
                 ))
   ),
@@ -334,6 +338,8 @@ server <- function(input, output) {
       filter(DATE >= input$date_range[1] & DATE <= input$date_range[2]) %>%
       select(c("DATE", input$countries))
   })
+  
+ 
   
   # Reactive expression for data subset based on date range for ComparisonPlot
   selectedData2 <- reactive({
@@ -359,6 +365,7 @@ server <- function(input, output) {
       filter(DATE >= input$date_range5[1] & DATE <= input$date_range5[2]) %>%
       select(c("DATE", c("CMCI", input$indicator)))
   })
+
 
   
   output$CMCIPlot <- renderPlotly({
@@ -558,6 +565,8 @@ server <- function(input, output) {
     return(p)
     
   })
+  
+ 
   
   output$LeadPlot <- renderPlotly({
     
