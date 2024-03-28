@@ -24,6 +24,22 @@ names(cci_cmci_df) <- gsub("\\.", " ", names(cci_cmci_df))
 ui <- page_navbar(
   theme = bs_theme(version = 5, bootswatch = "morph"),
   title = "CMCI Dashboard",
+  tags$head(
+    tags$style(HTML("
+      :root {
+        --accordion-bg-color: #B1B5C8; 
+        --accordion-text-color: black; 
+      }
+      .accordion-item {
+        background-color: white; /* Set background color using CSS variable */
+        color: black; /* Set text color using CSS variable */
+      }
+      .accordion-button {
+        background-color: #B1B5C8; /* Set background color for accordion buttons */
+        color: black; /* Set text color for accordion buttons */
+      }
+    "))
+    ),
   nav_panel(title = "Full Country CMCI Data", 
             
             page_fillable(
@@ -165,7 +181,45 @@ ui <- page_navbar(
             
             page_fillable(
               card(
-                card_header("CMCI Index Info")
+                HTML('<p class="fs-2">Composite Macroeconomic Consumer Index (CMCI)</p>'),
+                HTML('<div class="p-3 mb-2 bg-light-subtle text-light-emphasis">In the aftermath of the COVID-19 pandemic, the global economy has experienced unprecedented shifts. The pandemic gave rise to supply chain disruptions, hindered economic growth, and introduced economic challenges on a global scale. These multifaceted issues have contributed to heightened volatility in the stock market and unpredictable fluctuations in business dynamics. Despite the effectiveness of traditional economic tools such as GDP Now models and indicators like the Consumer Confidence Index (CCI) in the past, their predictive capabilities have been challenged by the unique confluence of challenges brought about by the pandemic. \n The CMCI index offers an alternative to traditional measures of consumer sentiment, without the use of expensive survey data. </div>'),
+                HTML('<div class="p-3 mb-2 bg-light-subtle text-light-emphasis">Addressing the limitations of the CCI and single-value indicators, the CMCI is a composite index that serves as a proxy for consumer sentiment. The CMCI incorporates eleven distinct macroeconomic indicators collectively influencing consumer confidence and expectations. The construction of the HOME index utilizes data from $14$ high-earning countries in the OECD, including the United States, spanning the years 1995 to 2022, with a specific focus on the years impacted by the COVID-19 pandemic.</div>'),
+                HTML('<p class="fs-4">CMCI Variables</p>'),
+                HTML('<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        <p class="fw-bold">Gross Domestic Product (GDP)</p> 
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">Information on GDP. </div>
+                       </div>
+                       </div>
+                       
+               <div class="accordion-item">
+               <h2 class="accordion-header">
+               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+               <p class="fw-bold">Household Disposible Income</p> 
+             </button>
+               </h2>
+               <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+               <div class="accordion-body">Information on HDI. </div>
+               </div>
+               </div>
+               
+               <div class="accordion-item">
+               <h2 class="accordion-header">
+               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+              <p class="fw-bold">Gross Household Savings</p>  
+             </button>
+               </h2>
+               <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+               <div class="accordion-body">Information on GHS </div>
+</div>
+  </div>
+</div>')
+
                 ))
   ),
   nav_spacer(),
