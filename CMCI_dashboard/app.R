@@ -189,54 +189,158 @@ ui <- page_navbar(
                 #<p class="lh-base">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
                 HTML('<div class="p-3 mb-n6 bg-light-subtle text-dark "><p class="lh-base">In the aftermath of the COVID-19 pandemic, the global economy has experienced unprecedented shifts. The pandemic gave rise to supply chain disruptions, hindered economic growth, and introduced economic challenges on a global scale. These multifaceted issues have contributed to heightened volatility in the stock market and unpredictable fluctuations in business dynamics. Despite the effectiveness of traditional economic tools such as GDP Now models and indicators like the Consumer Confidence Index (CCI) in the past, their predictive capabilities have been challenged by the unique confluence of challenges brought about by the pandemic. <br><br> The CMCI index offers an alternative to traditional measures of consumer sentiment, without the use of expensive survey data.<br><br> Addressing the limitations of the CCI and single-value indicators, the CMCI is a composite index that serves as a proxy for consumer sentiment. The CMCI incorporates eleven distinct macroeconomic indicators collectively influencing consumer confidence and expectations as shown below. The eleven macroeconomic factors were collected from 14 different, high earning nations.</p> </div>'),
                 HTML('<p class="fs-4 ">CMCI Variables</p>'),
-                HTML('<div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        <p class="fw-bold">Gross Domestic Product (GDP)</p> 
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Information on GDP. </div>
-                       </div>
-                       </div>
-                       
-               <div class="accordion-item">
-               <h2 class="accordion-header">
-               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-               <p class="fw-bold">Household Disposible Income</p> 
-             </button>
-               </h2>
-               <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-               <div class="accordion-body">Information on HDI. </div>
-               </div>
-               </div>
-               
-               <div class="accordion-item">
-               <h2 class="accordion-header">
-               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-              <p class="fw-bold">Gross Household Savings</p>  
-             </button>
-               </h2>
-               <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-               <div class="accordion-body">Information on GHS </div>
-</div>
+                HTML('<div class="container">
+  <div class="row">
+    <!-- First column -->
+    <div class="col-md-6">
+      <div class="accordion accordion-flush" id="accordionFlushExampleLeft">
+        <!-- First accordion item -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              <p class="fw-bold">Gross Domestic Product (GDP)</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
+            <div class="accordion-body">Information on GDP </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              <p class="fw-bold">Household Disposible Income </p> 
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
+            <div class="accordion-body">Information on HDI </div>
+          </div>
+        </div>
+        
+                <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+              <p class="fw-bold">Household Gross Savings</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
+            <div class="accordion-body">Information on HGI </div>
+          </div>
+        </div>
+        
+        
+                <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+              <p class="fw-bold">Employee Compensation</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
+            <div class="accordion-body">Information on EC </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+              <p class="fw-bold">Employment Rate </p>  
+            </button>
+          </h2>
+          <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleRight">
+            <div class="accordion-body">Information on ER </div>
+          </div>
+        </div>
+        
+        
+        
+      </div>
+    </div>
+
+    <!-- Second column -->
+    <div class="col-md-6">
+      <div class="accordion accordion-flush" id="accordionFlushExampleRight">
+        <!-- Second accordion item -->
+
+        
+        
+                
+                <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+              <p class="fw-bold">Consumer Loan Interest Rates</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
+            <div class="accordion-body">Information on CLIR </div>
+          </div>
+        </div>
+        
+                        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+              <p class="fw-bold">Mortagage Loan Interest Rates</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
+            <div class="accordion-body">Information on MLIR </div>
+          </div>
+        </div>
+
+        
+                                        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+              <p class="fw-bold">Share Price Index</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseEight" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
+            <div class="accordion-body">Information on SPI </div>
+          </div>
+        </div>
+        
+                                                <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+              <p class="fw-bold">Terms of Trade</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseNine" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
+            <div class="accordion-body">Information on TOT </div>
+          </div>
+        </div>
+        
+                
+                                <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+              <p class="fw-bold">Home Price Index</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseTen" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
+            <div class="accordion-body">Information on Residential Property Prices </div>
+          </div>
+        </div>
+        
+                        
+                                <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">
+              <p class="fw-bold">Effective Exchange Rate</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseEleven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
+            <div class="accordion-body">Information on EER</div>
+          </div>
+        </div>
+       
+        
+      </div>
+    </div>
   </div>
-</div>
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     '
-                     
-                     
-                     
-                     
-                     
-                     ),HTML('<p class="fs-4 ">Evaluating CMCI Accuracy</p>'),
+</div>')
+                
+                
+                ,HTML('<p class="fs-4 ">Evaluating CMCI Accuracy</p>'),
                HTML('<div class="container">
   <div class="row">
     <div class="col-md-6">
