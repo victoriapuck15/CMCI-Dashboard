@@ -254,7 +254,7 @@ ui <- page_navbar(
               <th scope="col" class="font-weight-bold text-dark">% of Variance Explained</th>
             </tr>
           </thead>
-          
+          <p class="fs-5 ">PCA Results</p>
           <tbody class="table-light">
             <tr>
               <th scope="row" class="fw-normal">PC 1: Quarterly Gross Domestic Product</th>
@@ -315,6 +315,67 @@ ui <- page_navbar(
     </div>
   </div>
 </div>
+'), HTML('<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <p class="fs-5">GARCH Volatility Analysis</p>
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              <p class="fw-bold">Mean Model</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">The mean model revealed a negative constant mean coefficient μ of -0.1476. <br> <br> This suggests a tendency for the home index to experience below-average returns during the analyzed period.</div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              <p class="fw-bold">Volatility Model</p> 
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">The Volaitility Model reveals three different parameters: <br> <br> <ul>
+  <li>Constant Variance (ω) = 1.9712e-03 </li>
+  <li>ARCH coefficient (α[1]) = 0.8758 </li>
+  <li>GARCH Coefficient (β[1]) = 0.1242 </li>
+</ul>  The positive ARCH coefficient (α[1]) implies a significant impact of past volatility shocks on the current volatility level, indicating volatility clustering. Additionally, the GARCH coefficient GARCH Coefficient (β[1]) of 0.1242 signifies the persistence of the  impact of past volatility on future volatility, showcasing a degree of memory in the volatility process.</div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+              <p class="fw-bold">Model Fit</p>  
+            </button>
+          </h2>
+          <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">The Fit Model of reveals three different parameters: <br> <br> <ul>
+  <li>Log-Likelihood = -9.09875 </li>
+  <li>AIC= 26.1975 </li>
+  <li>BIC= 32.0604 </li>
+</ul> The low log-likelihood and associated AIC and BIC values indicate a relatively good fit of the GARCH model to the data. </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Second column of just text -->
+      <div class="p-1 mb-n6 bg-light-subtle text-dark">
+        <p class="lh-base"> <br> <br> <br> 
+          The generalized autoregressive conditional heteroskedasticity (GARCH) process, as employed by Abosedra et al., is utilized to analyze the data comprising the novel CMCI index. <br> <br> 
+          Widely acknowledged as the industry standard for estimating volatility in financial markets and the economy, the application of the GARCH process aims to unveil insights into the dynamics between consumer sentiment (represented by the CMCI index) and macroeconomic factors. This approach seeks to identify symmetries between variables, with a particular focus on discerning the variables that contribute the most to the cumulative variance of the dataset.
+          <br> <br>
+          The results of the GARCH analysis for the CMCI shed light on the presence of volatility clustering, leverage effects, and the persistence of past volatility. This analysis goes beyond conventional measures of risk and return, offering a dynamic perspective on the underlying volatility.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
 ')
 
                 ))
