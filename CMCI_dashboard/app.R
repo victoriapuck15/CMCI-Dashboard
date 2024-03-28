@@ -40,7 +40,7 @@ ui <- page_navbar(
       }
     "))
     ),
-  nav_panel(title = "Full Country CMCI Data", 
+  nav_panel(title = "CMCI Data", 
             
             page_fillable(
               card(
@@ -63,7 +63,7 @@ ui <- page_navbar(
                 ))
             )
             ),
-  nav_panel(title = "United States Index Data", 
+  nav_panel(title = "U.S Index Data", 
             
             page_fillable(
               
@@ -89,7 +89,7 @@ ui <- page_navbar(
             )
             
             ),
-  nav_panel(title = "Country by Country CMCI and CCI Data", 
+  nav_panel(title = "Comparitive CMCI and CCI Data", 
             
             page_fillable(
               
@@ -117,7 +117,7 @@ ui <- page_navbar(
             )
             
             ),
-  nav_panel(title = "United States Lag Data", 
+  nav_panel(title = "U.S Lag Data", 
             
             page_fillable(
               
@@ -147,7 +147,7 @@ ui <- page_navbar(
             
   ),
   
-  nav_panel(title = "United States Lead Data", 
+  nav_panel(title = "U.S Lead Data", 
             
             page_fillable(
               
