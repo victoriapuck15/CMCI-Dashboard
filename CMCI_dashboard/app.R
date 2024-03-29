@@ -480,7 +480,7 @@ ui <- page_navbar(
   </div>
 </div>
 
-')
+'),
 
                 ))
   ),
