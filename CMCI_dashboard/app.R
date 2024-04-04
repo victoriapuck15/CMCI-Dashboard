@@ -14,6 +14,8 @@ data2 <- read.csv("cmciGood2.csv")
 compare_df <- read.csv("compare_data.csv")
 cci_cmci_df <- read.csv("CMCI_FINAL.csv")
 
+data2[2:14]
+
 colnames(data2)[1] <- "DATE"
 cci_cmci_df <- as.data.frame(cci_cmci_df)
 
@@ -535,11 +537,47 @@ server <- function(input, output) {
   
   output$CMCIPlot <- renderPlotly({
     # Filter data based on selected countries
+    
+    if (length(input$countries) == 0) {
+      # When no countries are selected, display a placeholder message
+      p <- plot_ly() %>%
+        layout(
+          title = list(
+            text = "No Data Selected",
+            font = list(size = 30, color = '#333333', family = "Arial, sans-serif"),
+            x = 0.5
+          ),
+          plot_bgcolor = 'rgba(0, 0, 0, 0)', # Set background color to white for a clean look
+          paper_bgcolor = 'rgba(0, 0, 0, 0)',
+          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+          annotations = list(
+            list(
+              text = "It seems as though you haven't selected <br> any countries to plot!<br><br>Please select at least one country<br>to display the data.",
+              x = 0.5,
+              y = 0.5,
+              xref = "paper",
+              yref = "paper",
+              showarrow = FALSE,
+              font = list(
+                family = "Arial, sans-serif",
+                size = 25,
+                color = '#666666'
+              ),
+              align = "center"
+            )
+          ),
+          margin = list(l = 50, r = 50, t = 50, b = 50)
+        ) %>%
+        config(displayModeBar = FALSE) # Hide the mode bar for a cleaner look
+    } else {
+    
     dataSelected <- selectedData()
     
     # Convert to long format for plotting with plotly
     dataLong <- reshape2::melt(dataSelected, id.vars = "DATE", 
                                variable.name = "Country", value.name = "Index")
+    
     
     # Generate plot
     p <- plot_ly(dataLong, x = ~DATE, y = ~Index, color = ~Country, type = 'scatter', 
@@ -585,12 +623,51 @@ server <- function(input, output) {
         displaylogo = FALSE,
         modeBarButtonsToRemove = list('select2d', 'lasso2d')
       )
+      
+    }
     
-    return(p)
+    
+      return(p)
+    
   })
   
   output$ComparisonPlot <- renderPlotly({
     # Filter data based on selected countries
+    
+    if (length(input$indexes) == 0) {
+      # When no countries are selected, display a placeholder message
+      p <- plot_ly() %>%
+        layout(
+          title = list(
+            text = "No Data Selected",
+            font = list(size = 30, color = '#333333', family = "Arial, sans-serif"),
+            x = 0.5
+          ),
+          plot_bgcolor = 'rgba(0, 0, 0, 0)', # Set background color to white for a clean look
+          paper_bgcolor = 'rgba(0, 0, 0, 0)',
+          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+          annotations = list(
+            list(
+              text = "It seems as though you haven't selected <br> any indexes to plot!<br><br>Please select at least one index<br>to display the data.",
+              x = 0.5,
+              y = 0.5,
+              xref = "paper",
+              yref = "paper",
+              showarrow = FALSE,
+              font = list(
+                family = "Arial, sans-serif",
+                size = 25,
+                color = '#666666'
+              ),
+              align = "center"
+            )
+          ),
+          margin = list(l = 50, r = 50, t = 50, b = 50)
+        ) %>%
+        config(displayModeBar = FALSE) # Hide the mode bar for a cleaner look
+    } else {
+    
     dataSelected <- selectedData2()
     
     # Convert to long format for plotting with plotly
@@ -639,7 +716,7 @@ server <- function(input, output) {
         displaylogo = FALSE,
         modeBarButtonsToRemove = list('select2d', 'lasso2d')
       )
-    
+    }
     return(p)
     
   })
