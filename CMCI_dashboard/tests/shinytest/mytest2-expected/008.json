@@ -1,0 +1,49 @@
+{
+  "input": {
+    "cmciLag": 0,
+    "cmciLead": 0,
+    "countries": [
+      "AUS",
+      "AUT",
+      "BEL",
+      "DEU",
+      "DNK",
+      "ESP",
+      "GBR",
+      "IRL",
+      "NLD",
+      "POL",
+      "PRT",
+      "SVN",
+      "SWE",
+      "USA"
+    ],
+    "date_range": [
+      "1997-01-31",
+      "2022-10-31"
+    ],
+    "date_range2": [
+      "1997-01-31",
+      "2022-10-31"
+    ],
+    "date_range3": [
+      "1995-01-31",
+      "2022-10-31"
+    ],
+    "date_range4": [
+      "1997-01-31",
+      "2022-10-31"
+    ],
+    "date_range5": [
+      "1997-01-31",
+      "2022-10-31"
+    ],
+    "indexes": null
+  },
+  "output": {
+
+  },
+  "export": {
+
+  }
+}

@@ -5,7 +5,7 @@ library(bslib)
 library(dplyr)
 library(lubridate)
 library(leaflet)
-
+library(shinytest)
 
 
 
@@ -45,143 +45,10 @@ ui <- page_navbar(
         color: black; /* Set text color for accordion buttons */
       }
     "))
-    ),
-  nav_panel(title = "CMCI Data", 
-            
-            page_fillable(
-              card(
-                card_header("CMCI Index Country Data Over Time"),
-                layout_sidebar(
-                  sidebar = sidebar(
-                    dateRangeInput("date_range", "Date Range:",
-                                   start = min(data2$DATE),
-                                   end = max(data2$DATE),
-                                   min = min(data2$DATE),
-                                   max = max(data2$DATE)),
-                    
-                    hr(),
-                    
-                    checkboxGroupInput("countries", "Select Countries:", 
-                                       choices = colnames(data2)[-1], 
-                                       selected = colnames(data2)[-1])
-                  ),
-                  plotlyOutput("CMCIPlot")
-                ))
-            )
-            ),
-  nav_panel(title = "U.S Index Data", 
-            
-            page_fillable(
-              
-              card(
-                card_header("United States Index Comparison Plot"),
-                layout_sidebar(
-                  sidebar = sidebar(
-                    dateRangeInput("date_range2", "Date Range:",
-                                   start = min(compare_df$DATE),
-                                   end = max(compare_df$DATE),
-                                   min = min(compare_df$DATE),
-                                   max = max(compare_df$DATE)),
-                    
-                    hr(),
-                    
-                    checkboxGroupInput("indexes", "Select Indexes:", 
-                                       choices = colnames(compare_df)[-1], 
-                                       selected = colnames(compare_df)[-1])
-                  ),
-                  plotlyOutput("ComparisonPlot")
-                ))
-              
-            )
-            
-            ),
-  nav_panel(title = "Comparitive CMCI and CCI Data", 
-            
-            page_fillable(
-              
-              card(
-                card_header("Full Country CCI and CMCI Comparison Graph"),
-                layout_sidebar(
-                  sidebar = sidebar(
-                    dateRangeInput("date_range3", "Date Range:",
-                                   start = min(cci_cmci_df$DATE),
-                                   end = max(cci_cmci_df$DATE),
-                                   min = min(cci_cmci_df$DATE),
-                                   max = max(cci_cmci_df$DATE)),
-                    
-                    hr(),
-                    
-                    varSelectInput("cmci", "CMCI Country", cci_cmci_df[2:15], 
-                                   selected = "USA CMCI"),
-                    hr(),
-                    varSelectInput("cci", "CCI Country", cci_cmci_df[16:30], 
-                                   selected = "USA CCI")
-                  ),
-                  plotlyOutput("CMCIvsCCI")
-                ))
-              
-            )
-            
-            ),
-  nav_panel(title = "U.S Lag Data", 
-            
-            page_fillable(
-              
-              card(
-                card_header("United States CMCI Lag Plot"),
-                layout_sidebar(
-                  sidebar = sidebar(
-                    dateRangeInput("date_range4", "Date Range:",
-                                   start = min(compare_df$DATE),
-                                   end = max(compare_df$DATE),
-                                   min = min(compare_df$DATE),
-                                   max = max(compare_df$DATE)),
-                    
-                    hr(),
-                    
-                    varSelectInput("indicator", "Indicator", compare_df[3:5], 
-                                   selected = "CSI"),
-                    hr(),
-                    sliderInput("cmciLag", "Lag CMCI by:",
-                                min = 0, max = 4, value = 0, step = 1)
-                    
-                  ),
-                  plotlyOutput("LagPlot")
-                ))
-              
-            )
-            
   ),
   
-  nav_panel(title = "U.S Lead Data", 
-            
-            page_fillable(
-              
-              card(
-                card_header("United States CMCI Lead Plot"),
-                layout_sidebar(
-                  sidebar = sidebar(
-                    dateRangeInput("date_range5", "Date Range:",
-                                   start = min(compare_df$DATE),
-                                   end = max(compare_df$DATE),
-                                   min = min(compare_df$DATE),
-                                   max = max(compare_df$DATE)),
-                    
-                    hr(),
-                    
-                    varSelectInput("indicator", "Indicator", compare_df[3:5], 
-                                   selected = "CSI"),
-                    hr(),
-                    sliderInput("cmciLead", "Lead CMCI by:",
-                                min = 0, max = 4, value = 0, step = 1)
-                    
-                  ),
-                  plotlyOutput("LeadPlot")
-                ))
-              
-            )
-            
-  ),
+  # CMCI Index Info page as the first page
+  
   
   nav_panel(title = "CMCI Index Info", 
             
@@ -343,7 +210,7 @@ ui <- page_navbar(
                 
                 
                 ,HTML('<p class="fs-4 ">Evaluating CMCI Accuracy</p>'),
-               HTML('<div class="container">
+                HTML('<div class="container">
   <div class="row">
     <div class="col-md-6">
       <div class="p-1 mb-n6 bg-light-subtle text-dark">
@@ -480,13 +347,148 @@ ui <- page_navbar(
       </div>
     </div>
   </div>
-</div>
-
-'),
-
-                ))
+</div>')
+              ))
   ),
+  nav_panel(title = "CMCI Data", 
+            
+            page_fillable(
+              card(
+                card_header("CMCI Index Country Data Over Time"),
+                layout_sidebar(
+                  sidebar = sidebar(
+                    dateRangeInput("date_range", "Date Range:",
+                                   start = min(data2$DATE),
+                                   end = max(data2$DATE),
+                                   min = min(data2$DATE),
+                                   max = max(data2$DATE)),
+                    
+                    hr(),
+                    
+                    checkboxGroupInput("countries", "Select Countries:", 
+                                       choices = colnames(data2)[-1], 
+                                       selected = colnames(data2)[-1])
+                  ),
+                  plotlyOutput("CMCIPlot")
+                ))
+            )
+  ),
+  nav_panel(title = "U.S Index Data", 
+            
+            page_fillable(
+              
+              card(
+                card_header("United States Index Comparison Plot"),
+                layout_sidebar(
+                  sidebar = sidebar(
+                    dateRangeInput("date_range2", "Date Range:",
+                                   start = min(compare_df$DATE),
+                                   end = max(compare_df$DATE),
+                                   min = min(compare_df$DATE),
+                                   max = max(compare_df$DATE)),
+                    
+                    hr(),
+                    
+                    checkboxGroupInput("indexes", "Select Indexes:", 
+                                       choices = colnames(compare_df)[-1], 
+                                       selected = colnames(compare_df)[-1])
+                  ),
+                  plotlyOutput("ComparisonPlot")
+                ))
+              
+            )
+            
+  ),
+  nav_panel(title = "Comparitive CMCI and CCI Data", 
+            
+            page_fillable(
+              
+              card(
+                card_header("Full Country CCI and CMCI Comparison Graph"),
+                layout_sidebar(
+                  sidebar = sidebar(
+                    dateRangeInput("date_range3", "Date Range:",
+                                   start = min(cci_cmci_df$DATE),
+                                   end = max(cci_cmci_df$DATE),
+                                   min = min(cci_cmci_df$DATE),
+                                   max = max(cci_cmci_df$DATE)),
+                    
+                    hr(),
+                    
+                    varSelectInput("cmci", "CMCI Country", cci_cmci_df[2:15], 
+                                   selected = "USA CMCI"),
+                    hr(),
+                    varSelectInput("cci", "CCI Country", cci_cmci_df[16:30], 
+                                   selected = "USA CCI")
+                  ),
+                  plotlyOutput("CMCIvsCCI")
+                ))
+              
+            )
+            
+  ),
+  nav_panel(title = "U.S Lag Data", 
+            
+            page_fillable(
+              
+              card(
+                card_header("United States CMCI Lag Plot"),
+                layout_sidebar(
+                  sidebar = sidebar(
+                    dateRangeInput("date_range4", "Date Range:",
+                                   start = min(compare_df$DATE),
+                                   end = max(compare_df$DATE),
+                                   min = min(compare_df$DATE),
+                                   max = max(compare_df$DATE)),
+                    
+                    hr(),
+                    
+                    varSelectInput("indicator", "Indicator", compare_df[3:5], 
+                                   selected = "CSI"),
+                    hr(),
+                    sliderInput("cmciLag", "Lag CMCI by:",
+                                min = 0, max = 4, value = 0, step = 1)
+                    
+                  ),
+                  plotlyOutput("LagPlot")
+                ))
+              
+            )
+            
+  ),
+  
+  nav_panel(title = "U.S Lead Data", 
+            
+            page_fillable(
+              
+              card(
+                card_header("United States CMCI Lead Plot"),
+                layout_sidebar(
+                  sidebar = sidebar(
+                    dateRangeInput("date_range5", "Date Range:",
+                                   start = min(compare_df$DATE),
+                                   end = max(compare_df$DATE),
+                                   min = min(compare_df$DATE),
+                                   max = max(compare_df$DATE)),
+                    
+                    hr(),
+                    
+                    varSelectInput("indicator", "Indicator", compare_df[3:5], 
+                                   selected = "CSI"),
+                    hr(),
+                    sliderInput("cmciLead", "Lead CMCI by:",
+                                min = 0, max = 4, value = 0, step = 1)
+                    
+                  ),
+                  plotlyOutput("LeadPlot")
+                ))
+              
+            )
+            
+  ),
+  
   nav_spacer(),
+  
   nav_menu(
     title = "Sources",
     align = "right",
@@ -494,7 +496,6 @@ ui <- page_navbar(
     nav_item(tags$a("Our Paper", href = "https://www.overleaf.com/read/btjkspsqpdjq#5f5c4e"))
   )
 )
-
 
 # Define server logic
 server <- function(input, output) {
@@ -506,7 +507,7 @@ server <- function(input, output) {
       select(c("DATE", input$countries))
   })
   
- 
+  
   
   # Reactive expression for data subset based on date range for ComparisonPlot
   selectedData2 <- reactive({
@@ -522,7 +523,7 @@ server <- function(input, output) {
   })
   
   selectedData4 <- reactive({
-     compare_df %>%
+    compare_df %>%
       filter(DATE >= input$date_range4[1] & DATE <= input$date_range4[2]) %>%
       select(c("DATE", c("CMCI", input$indicator)))
   })
@@ -532,8 +533,8 @@ server <- function(input, output) {
       filter(DATE >= input$date_range5[1] & DATE <= input$date_range5[2]) %>%
       select(c("DATE", c("CMCI", input$indicator)))
   })
-
-
+  
+  
   
   output$CMCIPlot <- renderPlotly({
     # Filter data based on selected countries
@@ -808,7 +809,7 @@ server <- function(input, output) {
     
   })
   
- 
+  
   
   output$LeadPlot <- renderPlotly({
     
@@ -860,5 +861,6 @@ server <- function(input, output) {
 
 # Run the application
 shinyApp(ui = ui, server = server)
+
 
 
