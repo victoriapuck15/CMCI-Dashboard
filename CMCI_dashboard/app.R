@@ -473,7 +473,7 @@ ui <- page_navbar(
                     
                     hr(),
                     
-                    varSelectInput("indicator", "Indicator", compare_df[3:5], 
+                    varSelectInput("indicatorTwo", "Indicator", compare_df[3:5], 
                                    selected = "CSI"),
                     hr(),
                     sliderInput("cmciLead", "Lead CMCI by:",
@@ -531,7 +531,7 @@ server <- function(input, output) {
   selectedData5 <- reactive({
     compare_df %>%
       filter(DATE >= input$date_range5[1] & DATE <= input$date_range5[2]) %>%
-      select(c("DATE", c("CMCI", input$indicator)))
+      select(c("DATE", c("CMCI", input$indicatorTwo)))
   })
   
   
@@ -822,7 +822,7 @@ server <- function(input, output) {
       mutate(CMCI_led = lead(CMCI, as.numeric(input$cmciLead)))
     
     # Recalculate correlation and p-value with lagged CMCI
-    cor_test <- cor.test(dataSelected[["CMCI_led"]], dataSelected[[input$indicator]], use = "complete.obs")
+    cor_test <- cor.test(dataSelected[["CMCI_led"]], dataSelected[[input$indicatorTwo]], use = "complete.obs")
     cor_text <- sprintf("Correlation: %.4f\np-value: %.4f", cor_test$estimate, cor_test$p.value)
     
     # Plotly graph creation code remains the same, just change `y = ~dataSelected[["CMCI"]]` 
@@ -831,8 +831,8 @@ server <- function(input, output) {
     p <- plot_ly(data = dataSelected, x = ~DATE) %>%
       add_lines(y = ~dataSelected[["CMCI_led"]], name = "CMCI Line", line = list(color = 'darkgreen', width = 2),
                 hoverinfo = 'text', text = ~paste('Date: ', DATE, '<br>Value: ', CMCI_led, '<br>Index: CMCI Line')) %>%
-      add_lines(y = ~dataSelected[[input$indicator]], name = "Indicator Line", line = list(color = 'navy', width = 2),
-                hoverinfo = 'text', text = ~paste('Date: ', DATE, '<br>Value: ', dataSelected[[input$indicator]], '<br>Index: Indicator Line')) %>%
+      add_lines(y = ~dataSelected[[input$indicatorTwo]], name = "Indicator Line", line = list(color = 'navy', width = 2),
+                hoverinfo = 'text', text = ~paste('Date: ', DATE, '<br>Value: ', dataSelected[[input$indicatorTwo]], '<br>Index: Indicator Line')) %>%
       layout(
         title = list(text = "United States Indicator Comparison Graph", font = list(size = 24, color = 'black')),
         xaxis = list(title = list(text = "Date", font = list(size = 18, color = "black")),
