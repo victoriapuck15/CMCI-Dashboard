@@ -288,7 +288,86 @@ ui <- page_navbar(
     </div>
   </div>
 </div>
-'), HTML('<div class="container">
+'),                HTML('<div class="container">
+ <p class="fs-5 ">Evaluating CMCI Predictive Power</p>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="p-1 mb-n6 bg-light-subtle text-dark">
+        <p class="lh-base">In order to most accurately evaluate the accuracy of the CMCI, a Princple Component Analysis (PCA) must first be conducted. <br>  <br> PCA is a multivariate statistical technique that aims to uncover the latent structures within a dataset, revealing the key variables that contribute significantly to the cumulative variance observed in the macroeconomic factors comprising the CMCI. <br> <br> Notably, the analysis revealed that a substantial portion, about 25.21% of the variance is explained by the Gross Domestic Product (GDP) macroeconomic indicator. This finding underscores the significance of GDP in predicting future values using the CMCI index.The second largest contributor to the variance of the data set is household disposable income, contributing  12.49% of the variance. 
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col" class="font-weight-bold text-dark">Component #</th>
+              <th scope="col" class="font-weight-bold text-dark">% of Variance Explained</th>
+            </tr>
+          </thead>
+          <p class="fs-5 ">Values</p>
+          <tbody class="table-light">
+            <tr>
+              <th scope="row" class="fw-normal">PC 1: Quarterly Gross Domestic Product</th>
+              <td>25.21%</td>
+            </tr>
+            <tr>
+              <th scope="row" class="fw-normal">PC 2: Household Disposable Income</th>
+              <td>12.59</td>
+            </tr>
+            <tr>
+              <th scope="row" class="fw-normal">PC 3: Gross Household Savings</th>
+              <td>12.02%</td>
+            </tr>
+            
+            <tr>
+              <th scope="row" class="fw-normal">PC 4: Employee Compensation</th>
+              <td>10.98%</td>
+            </tr>            
+
+            <tr>
+              <th scope="row" class="fw-normal">PC 5: Employment Rate</th>
+              <td>9.10%</td>
+            </tr>
+            
+            <tr>
+              <th scope="row" class="fw-normal">PC 6: Share Price Index</th>
+              <td>8.09%</td>
+            </tr>
+            
+            <tr>
+              <th scope="row" class="fw-normal">PC 7: Effective Exchange Rate</th>
+              <td>7.48%</td>
+            </tr>
+
+            <tr>
+              <th scope="row" class="fw-normal">PC 8: Terms of Trade</th>
+              <td>5.56%</td>
+            </tr>
+
+            <tr>
+              <th scope="row" class="fw-normal">PC 9: House Price Index</th>
+              <td>4.87%</td>
+            </tr>
+
+            <tr>
+              <th scope="row" class="fw-normal">PC 10: Interest Rates on Mortgages</th>
+              <td>2.33%</td>
+            </tr>
+            
+            <tr>
+              <th scope="row" class="fw-normal">PC 11: Interest Rates on Consumer Loans</th>
+              <td>1.59%</td>
+            </tr>            
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+') ,HTML('<div class="container">
   <div class="row">
     <div class="col-md-6">
       <p class="fs-5">GARCH Volatility Analysis</p>
