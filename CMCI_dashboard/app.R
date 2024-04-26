@@ -293,7 +293,7 @@ ui <- page_navbar(
   <div class="row">
     <div class="col-md-6">
       <div class="p-1 mb-n6 bg-light-subtle text-dark">
-        <p class="lh-base">In order to most accurately evaluate the accuracy of the CMCI, a Princple Component Analysis (PCA) must first be conducted. <br>  <br> PCA is a multivariate statistical technique that aims to uncover the latent structures within a dataset, revealing the key variables that contribute significantly to the cumulative variance observed in the macroeconomic factors comprising the CMCI. <br> <br> Notably, the analysis revealed that a substantial portion, about 25.21% of the variance is explained by the Gross Domestic Product (GDP) macroeconomic indicator. This finding underscores the significance of GDP in predicting future values using the CMCI index.The second largest contributor to the variance of the data set is household disposable income, contributing  12.49% of the variance. 
+        <p class="lh-base"> In the table to the right, the high 𝜇 values for the β coefficients indicates that the CMCI index has a high predictive power for the y variable, which in this case is the CCI. In addition to the high 𝜇 values seen in the table, there are also very low variance values, indicating that the statistically significant region for the 𝜇 value would not include zero, meaning that the CMCI has significant impact on predicting the CCI. The best result in this table is when the CMCI is lagged to t-3, which means the data is moved backward 3 quarters, making it a predictor for the CCI. In this scenario the 95% credible interval of the 𝜇 value for the β coefficient is (0.090,0.792). Being that zero is not included in this interval shows that the CMCI is a statistically significant predictor variable for the CCI in this case.
         </p>
       </div>
     </div>
@@ -302,64 +302,28 @@ ui <- page_navbar(
         <table class="table table-hover table-sm">
           <thead>
             <tr>
-              <th scope="col" class="font-weight-bold text-dark">Component #</th>
-              <th scope="col" class="font-weight-bold text-dark">% of Variance Explained</th>
+              <th scope="col" class="font-weight-bold text-dark">Lag of CMCI</th>
+              <th scope="col" class="font-weight-bold text-dark">Beta μ Value</th>
+              <th scope="col" class="font-weight-bold text-dark">Beta Variance Value</th>
             </tr>
           </thead>
           <p class="fs-5 ">Values</p>
           <tbody class="table-light">
             <tr>
-              <th scope="row" class="fw-normal">PC 1: Quarterly Gross Domestic Product</th>
-              <td>25.21%</td>
+              <th scope="row" class="fw-normal">t-1 Lag</th>
+              <td>0.3994</td>
+              <td>0.0381</td>
             </tr>
             <tr>
-              <th scope="row" class="fw-normal">PC 2: Household Disposable Income</th>
-              <td>12.59</td>
+              <th scope="row" class="fw-normal">t-2 Lag</th>
+              <td>0.4417</td>
+              <td>0.0321</td>
             </tr>
             <tr>
-              <th scope="row" class="fw-normal">PC 3: Gross Household Savings</th>
-              <td>12.02%</td>
+              <th scope="row" class="fw-normal">t-3 Lag</th>
+              <td>0.3942</td>
+              <td>0.0386</td>
             </tr>
-            
-            <tr>
-              <th scope="row" class="fw-normal">PC 4: Employee Compensation</th>
-              <td>10.98%</td>
-            </tr>            
-
-            <tr>
-              <th scope="row" class="fw-normal">PC 5: Employment Rate</th>
-              <td>9.10%</td>
-            </tr>
-            
-            <tr>
-              <th scope="row" class="fw-normal">PC 6: Share Price Index</th>
-              <td>8.09%</td>
-            </tr>
-            
-            <tr>
-              <th scope="row" class="fw-normal">PC 7: Effective Exchange Rate</th>
-              <td>7.48%</td>
-            </tr>
-
-            <tr>
-              <th scope="row" class="fw-normal">PC 8: Terms of Trade</th>
-              <td>5.56%</td>
-            </tr>
-
-            <tr>
-              <th scope="row" class="fw-normal">PC 9: House Price Index</th>
-              <td>4.87%</td>
-            </tr>
-
-            <tr>
-              <th scope="row" class="fw-normal">PC 10: Interest Rates on Mortgages</th>
-              <td>2.33%</td>
-            </tr>
-            
-            <tr>
-              <th scope="row" class="fw-normal">PC 11: Interest Rates on Consumer Loans</th>
-              <td>1.59%</td>
-            </tr>            
             
           </tbody>
         </table>
