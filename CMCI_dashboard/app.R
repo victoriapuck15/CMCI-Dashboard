@@ -71,7 +71,7 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
-            <div class="accordion-body">Information on GDP </div>
+            <div class="accordion-body">The value of the goods and services produced by the nations economy minus the value of the goods and services used up in production. GDP is more often used by the government of a single country to measure its economic health.</div>
           </div>
         </div>
         
@@ -82,7 +82,7 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
-            <div class="accordion-body">Information on HDI </div>
+            <div class="accordion-body">Household disposable income is income available to households such as wages and salaries, income from self-employment and unincorporated enterprises, income from pensions and other social benefits, and income from financial investments (less any payments of tax, social insurance contributions and interest on financial liabilities).</div>
           </div>
         </div>
         
@@ -93,7 +93,7 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
-            <div class="accordion-body">Information on HGI </div>
+            <div class="accordion-body">Net household saving is defined as household net disposable income plus the adjustment for the change in pension entitlements less household final consumption expenditure (households also include non-profit institutions serving households). The adjustment item concerns (mandatory) saving of households, by building up funds in employment-related pension schemes. Household saving is the main domestic source of funds to finance capital investments, a major impetus for long-term economic growth.</div>
           </div>
         </div>
         
@@ -105,7 +105,9 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
-            <div class="accordion-body">Information on EC </div>
+            <div class="accordion-body">Earnings and wages are defined as "the total remuneration, in cash or in kind, payable to all persons counted on the payroll (including homeworkers), in return for work done during the accounting period", regardless of whether it is paid on the basis of working time, output or piecework and whether it is paid regularly or not.
+
+</div>
           </div>
         </div>
         
@@ -116,7 +118,8 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleRight">
-            <div class="accordion-body">Information on ER </div>
+            <div class="accordion-body">
+Employment rates are defined as a measure of the extent to which available labour resources (people available to work) are being used. They are calculated as the ratio of the employed to the working age population. <br> <br> Employment rates are sensitive to the economic cycle, but in the longer term they are significantly affected by governments higher education and income support policies and by policies that facilitate employment of women and disadvantaged groups. Employed people are those aged 15 or over who report that they have worked in gainful employment for at least one hour in the previous week or who had a job but were absent from work during the reference week. The working age population refers to people aged 15 to 64.</div>
           </div>
         </div>
         
@@ -140,7 +143,7 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
-            <div class="accordion-body">Information on CLIR </div>
+            <div class="accordion-body">Interest rates on personal loans taken out at commercial bank. This does not include loans for business or home purchases.</div>
           </div>
         </div>
         
@@ -151,7 +154,7 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
-            <div class="accordion-body">Information on MLIR </div>
+            <div class="accordion-body">Interest rates on loans taken to purchase a home.</div>
           </div>
         </div>
 
@@ -163,7 +166,7 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseEight" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
-            <div class="accordion-body">Information on SPI </div>
+            <div class="accordion-body">Share price indices are calculated from the prices of common shares of companies traded on national or foreign stock exchanges. They are usually determined by the stock exchange, using the closing daily values for the monthly data, and normally expressed as simple arithmetic averages of the daily data. A share price index measures how the value of the stocks in the index is changing. </div>
           </div>
         </div>
         
@@ -174,7 +177,7 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseNine" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
-            <div class="accordion-body">Information on TOT </div>
+            <div class="accordion-body">Terms of trade are defined as the ratio between the index of export prices and the index of import prices. If the export prices increase more than the import prices, a country has a positive terms of trade, as for the same amount of exports, it can purchase more imports. </div>
           </div>
         </div>
         
@@ -186,7 +189,7 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseTen" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
-            <div class="accordion-body">Information on Residential Property Prices </div>
+            <div class="accordion-body">Housing prices include housing rent prices indices, real and nominal house prices indices, and ratios of price to rent and price to income. In most cases, the nominal house price index covers the sales of newly-built and existing dwellings, following the recommendations from the RPPI (Residential Property Prices Indices) manual. The real house price index is given by the ratio of the nominal house price index to the consumers’ expenditure deflator in each country from the OECD national accounts database. Both indices are seasonally adjusted. The price to income ratio is the nominal house price index divided by the nominal disposable income per head and can be considered as a measure of affordability. The price to rent ratio is the nominal house price index divided by the housing rent price index and can be considered as a measure of the profitability of house ownership. The price to income and price to rent ratios are indices with base year 2015.</div>
           </div>
         </div>
         
@@ -198,7 +201,7 @@ ui <- page_navbar(
             </button>
           </h2>
           <div id="flush-collapseEleven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExampleLeft">
-            <div class="accordion-body">Information on EER</div>
+            <div class="accordion-body">	Real effective exchange rate is the nominal effective exchange rate (a measure of the value of a currency against a weighted average of several foreign currencies) divided by a price deflator or index of costs.</div>
           </div>
         </div>
        
